@@ -5,17 +5,26 @@ import Message from './Message.jsx';
 // Be ready to add before render():
 // constructor(props) {
     // super();
-class MessageList extends Component {
+export default class MessageList extends Component {
+
+  static propTypes = {
+    messages: PropTypes.array
+  };
+
   render() {
     console.log("Rendering <MessageList/>");
-
+    // console.log(this.props.messages[0].content);
     const allMessages = this.props.messages.map(message => {
+      console.log(message.type);
+      if (message.type === 'incomingMessage') {
         return <Message key={ message.id } 
                         username={ message.username }
                         content={ message.content } />;
+      } else if (message.type === 'incomingNotification') {
+        return <Message key={ message.id } 
+                        notification={ message.content } />;
+      }
     });
-
-
     return (     
         <div>            
             <main className="messages">
@@ -25,9 +34,3 @@ class MessageList extends Component {
     );                       
   }
 }
-
-MessageList.propTypes = {
-  messages: PropTypes.array
-}
-
-export default MessageList;
