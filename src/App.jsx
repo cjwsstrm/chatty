@@ -40,33 +40,19 @@ export default class App extends Component {
     this.socket.onopen = () => { 
       // SET NAME COLOR CHANGE HERE?
     };
-
     this.socket.onmessage = event => {
-      if (Number.isInteger(JSON.parse(event.data))) {
+      const data = JSON.parse(event.data);
+      if (Number.isInteger(data)) {     //receiving userSet.size from server, which will be an integer 
         this.setState ({
-          usersOnline: JSON.parse(event.data)
+          usersOnline: data
         });
       } 
-      else if (!Number.isInteger(JSON.parse(event.data))) {
-        const newMessage = JSON.parse(event.data);
-        const updatedMessages = this.state.messages.concat(newMessage);
-        switch(newMessage.type) {
-        case 'incomingMessage':
-          this.setState({
-            messages: updatedMessages
-          });
-          break;
-        case 'incomingNotification':
-          this.setState({
-            messages: updatedMessages
-          });
-          break;
-        default:
-          throw new Error('Unknown event type ' + newMessage.type);
-        }
-
-        this.setState({ messages: [...this.state.messages, updatedMessages] });         
-      } 
+      else if (!Number.isInteger(data)) {
+        const updatedMessages = this.state.messages.concat(data);
+        this.setState({
+          messages: updatedMessages  
+        });
+      }
     };
   }
 
@@ -74,8 +60,8 @@ export default class App extends Component {
     return (
       <div>
         <nav className='navbar'>
-            <a href='/' className='navbar-brand'>Chatty</a>
-            <span className='navbar-online-users'>{this.state.usersOnline} users online</span>
+          <a href='/' className='navbar-brand'>Chatty</a>
+          <span className='navbar-online-users'>{this.state.usersOnline} users online</span>
         </nav>           
         <MessageList messages= { this.state.messages } />
         <ChatBar username= { this.state.currentUser.name }

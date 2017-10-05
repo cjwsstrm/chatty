@@ -21,11 +21,11 @@ export default class MessageList extends Component {
       }
     });
     return (     
-        <div>            
-            <main className='messages'>
-            {allMessages}
-            </main> 
-        </div>
+    <div>            
+      <main className='messages'>
+      {allMessages}
+      </main> 
+    </div>
     );                       
   }
 }

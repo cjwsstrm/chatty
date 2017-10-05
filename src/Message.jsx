@@ -7,7 +7,7 @@ Message.propTypes = {
   notification: PropTypes.string
 };
 
-export default function Message({username, content, notification}) {
+export default function Message({ username, content, notification }) {
   return (
     <div>              
       <div className='message'>
