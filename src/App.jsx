@@ -8,6 +8,7 @@ export default class App extends Component {
     this.state = {
       currentUser: {name: 'Anonymous'}, 
       messages: [],
+      usersOnline: 0
     };
     this.addMessage = this.addMessage.bind(this);
   }
@@ -19,7 +20,6 @@ export default class App extends Component {
       content: newPost
     };
     this.socket.send(JSON.stringify(newMessage));
-
   }
 
   onUserChanged = (username) => {
@@ -33,45 +33,49 @@ export default class App extends Component {
     };
     this.socket.send(JSON.stringify(nameChange));
     this.setState({ currentUser: { name: username }});
-    
   }
   
   componentDidMount() {
     this.socket = new WebSocket(`ws://${location.hostname}:3001`);
-    // console.log("componentDidMount <App />");
     this.socket.onopen = () => { 
-      console.log('Connected to server');
+      // SET NAME COLOR CHANGE HERE?
     };
-    this.socket.onmessage = event => {
-      const newMessage = JSON.parse(event.data);
-      const updatedMessages = this.state.messages.concat(newMessage);
-      switch(newMessage.type) {
-      case 'incomingMessage':
-        this.setState({
-          messages: updatedMessages
-        });
-        break;
-      case 'incomingNotification':
-        this.setState({
-          messages: updatedMessages
-        });
-        console.log(newMessage.content);
-        break;
-      default:
-        throw new Error("Unknown event type " + newMessage.type);
-    }
 
-      // this.setState({ messages: [...this.state.messages, newMessage] }); // google "spread operator"
-      // console.log(this.state.currentUser.name);               
-    };                                      
+    this.socket.onmessage = event => {
+      if (Number.isInteger(JSON.parse(event.data))) {
+        this.setState ({
+          usersOnline: JSON.parse(event.data)
+        });
+      } 
+      else if (!Number.isInteger(JSON.parse(event.data))) {
+        const newMessage = JSON.parse(event.data);
+        const updatedMessages = this.state.messages.concat(newMessage);
+        switch(newMessage.type) {
+        case 'incomingMessage':
+          this.setState({
+            messages: updatedMessages
+          });
+          break;
+        case 'incomingNotification':
+          this.setState({
+            messages: updatedMessages
+          });
+          break;
+        default:
+          throw new Error('Unknown event type ' + newMessage.type);
+        }
+
+        this.setState({ messages: [...this.state.messages, updatedMessages] });         
+      } 
+    };
   }
 
   render() {
-    // console.log("Rendering <App/>");
     return (
       <div>
-        <nav className="navbar">
-            <a href="/" className="navbar-brand">Chatty</a>
+        <nav className='navbar'>
+            <a href='/' className='navbar-brand'>Chatty</a>
+            <span className='navbar-online-users'>{this.state.usersOnline} users online</span>
         </nav>           
         <MessageList messages= { this.state.messages } />
         <ChatBar username= { this.state.currentUser.name }

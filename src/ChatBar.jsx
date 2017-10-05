@@ -17,7 +17,7 @@ export default class ChatBar extends Component {
     username: PropTypes.string,
     addMessage: PropTypes.func,
     onUserChanged: PropTypes.func,
-  }
+  };
 
   onMessage = (event) => {
     this.setState({
@@ -45,18 +45,17 @@ export default class ChatBar extends Component {
   }
 
   render() {
-    // console.log("Rendering <ChatBar/>");
     return (
-      <footer className="chatbar">
-        <input className="chatbar-username"
+      <footer className='chatbar'>
+        <input className='chatbar-username'
           onChange={this.onUser}
           onKeyDown={this.onUserChanged}
           defaultValue={this.state.username} />
-        <input className="chatbar-message"
+        <input className='chatbar-message'
           onChange={this.onMessage}
           onKeyDown={this.onMessageChanged}
           value={this.state.content}
-          placeholder="Type a message and hit ENTER" />
+          placeholder='Type a message and hit ENTER' />
       </footer>
     );
   }
