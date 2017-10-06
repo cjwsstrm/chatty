@@ -1,7 +1,6 @@
 Chatty
 =====================
-Chatty is a project for students at Lighthouse Labs. It served to introduce the student to React, babel and websockets.
-Chatty is a basic chat room that allow users to send messages that for all user to see. Users can change their names. The server will provide other users of any name changes, and also keep track of how many users are online.
+Chatty is a project for students at Lighthouse Labs. It served to introduce React, babel and websockets. Chatty is a basic chat room type app, that allow users to send messages for all users to see. Users can change their names, and if or when they do, the chatroom will notify all users of the name change. Chatty also has a counter current users.
 
 ### Usage
 
@@ -45,7 +44,7 @@ react
 react-dom
 ws
 
-####Chatty_server
+#### Chatty_server
 express
 uuid
 ws
