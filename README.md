@@ -1,11 +1,9 @@
-React Boilerplate
+Chatty
 =====================
-
-A minimal and light dev environment for ReactJS.
+Chatty is a project for students at Lighthouse Labs. It served to introduce the student to React, babel and websockets.
+Chatty is a basic chat room that allow users to send messages that for all user to see. Users can change their names. The server will provide other users of any name changes, and also keep track of how many users are online.
 
 ### Usage
-
-Clone the boilerplate and create your own git repo.
 
 ```
 git clone git@github.com:lighthouse-labs/react-simple-boilerplate.git
