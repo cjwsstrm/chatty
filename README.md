@@ -25,29 +25,29 @@ open http://localhost:3000
 ### Dependencies 
 
 #### Chatty
-babel-core
-babel-eslint
-babel-loader
-babel-preset-es2015
-babel-preset-react
-babel-preset-stage-0
-css-loader
-eslint
-eslint-plugin-react
-node-sass
-sass-loader
-sockjs-client
-style-loader
-webpack
-webpack-dev-server
-react
-react-dom
-ws
+- babel-core
+- babel-eslint
+- babel-loader
+- babel-preset-es2015
+- babel-preset-react
+- babel-preset-stage-0
+- css-loader
+- eslint
+- eslint-plugin-react
+- node-sass
+- sass-loader
+- sockjs-client
+- style-loader
+- webpack
+- webpack-dev-server
+- react
+- react-dom
+- ws
 
 #### Chatty_server
-express
-uuid
-ws
+- express
+- uuid
+- ws
 
 ### Screenshots
 ![1user](https://github.com/cjwsstrm/chatty/blob/master/docs/Chatty_1users.png?raw=true)
