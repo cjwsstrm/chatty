@@ -3,25 +3,23 @@ Chatty
 Chatty is a project for students at Lighthouse Labs. It served to introduce React, babel and websockets. Chatty is a basic chat room type app, that allow users to send messages for all users to see. Users can change their names, and if or when they do, the chatroom will notify all users of the name change. Chatty also has a counter displaying number of current users.
 
 ### Usage
+Clone the project
 
 ```
 git clone git@github.com:cjwsstrm/chatty.git
+```
+
+Install dependencies and start the servers.
+```
 cd chatty
-git remote rm origin
-git remote add origin [YOUR NEW REPOSITORY]
-# Manually update your package.json file
+npm install
+npm start
+open another terminal window
+cd chatty_server
+npm install
+node server.js
+open http://localhost:3000 in your browser of choice. 
 ```
-
-Install the dependencies for chatty and for chatty_server and start both servers.
-
-```
-npm install x2
-npm start & node server.js
-open http://localhost:3000
-```
-
-
-
 ### Dependencies 
 
 #### Chatty
