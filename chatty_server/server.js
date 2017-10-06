@@ -27,32 +27,38 @@ wss.on('connection', (ws) => {
     content: ''
   };
 
-  ws.on('message', function incoming(message) {       //handler for different types of messages
-    const inComingmessage = (JSON.parse(message));
-    switch(inComingmessage.type) {
-    case 'postMessage':
-      returnMessage = {
-        type: 'incomingMessage',
-        id: uuidv1(),
-        username: inComingmessage.username,
-        content: inComingmessage.content
-      }; 
-      break;
-    case 'postNotification':
-      returnMessage = {
-        type: 'incomingNotification',
-        id: uuidv1(),
-        content: inComingmessage.content
-      };
-      break;
-    default:
-      throw new Error("Unknown event type " + inComingmessage.type);
-    }
-    wss.clients.forEach(function each(client) {
-      if (client.readyState === SocketServer.OPEN) {
-        client.send(JSON.stringify(returnMessage));
+  ws.on('message', function incoming(message) {
+    try {
+      const inComingmessage = (JSON.parse(message));
+      switch(inComingmessage.type) {                 //handler for different types of messages
+      case 'postMessage':
+        returnMessage = {
+          type: 'incomingMessage',
+          id: uuidv1(),
+          username: inComingmessage.username,
+          content: inComingmessage.content
+        }; 
+        break;
+      case 'postNotification':
+        returnMessage = {
+          type: 'incomingNotification',
+          id: uuidv1(),
+          content: inComingmessage.content
+        };
+        break;
+      default:
+        throw new Error("Unknown event type " + inComingmessage.type);
       }
-    });
+      wss.clients.forEach(function each(client) {
+        if (client.readyState === SocketServer.OPEN) {
+          client.send(JSON.stringify(returnMessage));
+        }
+      });
+    } 
+    catch(ex) {
+      console.log(ex);
+      return;
+    }
   });
   
   ws.on('close', () => { 

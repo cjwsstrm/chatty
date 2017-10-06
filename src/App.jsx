@@ -41,17 +41,24 @@ export default class App extends Component {
       // SET NAME COLOR CHANGE HERE?
     };
     this.socket.onmessage = event => {
-      const data = JSON.parse(event.data);
-      if (Number.isInteger(data)) {     //receiving userSet.size from server, which will be an integer 
-        this.setState ({
-          usersOnline: data
-        });
-      } 
-      else if (!Number.isInteger(data)) {
-        const updatedMessages = this.state.messages.concat(data);
-        this.setState({
-          messages: updatedMessages  
-        });
+      // Promise.resolve(JSON.parse('{"key":"value"}')).then(json => {
+        // console.log(json);
+      try {
+        const data = JSON.parse(event.data); // ADD TRY CATCH TO PREVENT SERVER CRASH
+        if (Number.isInteger(data)) {     //receiving userSet.size from server, which will be an integer 
+          this.setState ({
+            usersOnline: data
+          });
+        } 
+        else if (!Number.isInteger(data)) {
+          const updatedMessages = this.state.messages.concat(data);
+          this.setState({
+            messages: updatedMessages  
+          });
+        }
+      }
+      catch(ex) {
+        console.error(ex);
       }
     };
   }
