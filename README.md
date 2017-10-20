@@ -38,6 +38,7 @@ open http://localhost:3000 in your browser of choice.
 - style-loader
 - webpack
 - webpack-dev-server
+- prop-types
 - react
 - react-dom
 - ws

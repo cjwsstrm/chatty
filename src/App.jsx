@@ -38,13 +38,10 @@ export default class App extends Component {
   componentDidMount() {
     this.socket = new WebSocket(`ws://${location.hostname}:3001`);
     this.socket.onopen = () => { 
-      // SET NAME COLOR CHANGE HERE?
     };
     this.socket.onmessage = event => {
-      // Promise.resolve(JSON.parse('{"key":"value"}')).then(json => {
-        // console.log(json);
       try {
-        const data = JSON.parse(event.data); // ADD TRY CATCH TO PREVENT SERVER CRASH
+        const data = JSON.parse(event.data); 
         if (Number.isInteger(data)) {     //receiving userSet.size from server, which will be an integer 
           this.setState ({
             usersOnline: data

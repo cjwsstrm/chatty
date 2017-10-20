@@ -56,7 +56,7 @@ wss.on('connection', (ws) => {
       });
     } 
     catch(ex) {
-      console.log(ex);
+      console.error(ex);
       return;
     }
   });
@@ -66,7 +66,7 @@ wss.on('connection', (ws) => {
     console.log('Client disconnected');
     wss.clients.forEach(function each(client) {
       if (client.readyState === SocketServer.OPEN) {
-      client.send(JSON.stringify(userSet.size));
+        client.send(JSON.stringify(userSet.size));
       }
     });
   });

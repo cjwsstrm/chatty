@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 
 export default class ChatBar extends Component {
 
-
-  // constructor({ username }) // get the things out of props right in the method signature, google "MDN destructuring"
   constructor(props) {
     super();
     this.state = {
@@ -13,7 +11,7 @@ export default class ChatBar extends Component {
     };
   }
 
-  static propTypes = { // Add propTypes directly to ChatBar class
+  static propTypes = { 
     username: PropTypes.string,
     addMessage: PropTypes.func,
     onUserChanged: PropTypes.func,
